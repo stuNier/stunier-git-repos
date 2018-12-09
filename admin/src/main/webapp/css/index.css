@@ -1,0 +1,202 @@
+body{
+    margin:0;
+    padding:0;
+    min-width:1903px;
+}
+.header{
+    width: 100%;
+    float: left;
+    background-color:#df691a;
+    height:80px;
+    line-height:80px;
+    text-align:center;
+}
+
+.body{
+    width: 100%;
+    float: left;
+    background-color:#1a27d4;
+    height: auto;
+    //height: 800px;
+    min-height:800px;
+}
+
+.left{
+    margin-left:10%;
+    float:left;
+    width:20%;
+    background-color:#d41a84;
+    min-height:800px;
+}
+.userInfor{
+    margin:10px 10% 10px 10%;
+    float:left;
+    background-color:#00FF7F;
+    width:80%;
+    height:120px;
+}
+.userInfor_image{
+    float:left;
+    margin:10px 10px 10px 10px;
+    background-color:#191970;
+    width:100px;
+    height:100px;
+    line-height:100px;
+    text-align:center;
+}
+.userInfor_name{
+    float:left;
+    background-color:#006400;
+    width:50%;
+    height:32px;
+    line-height:32px;
+    text-align:left;
+    margin:78px 10px 10px 0;
+    padding-left:5px;
+}
+.menu{
+    float:left;
+    margin:0 10% 0 10%;
+    width:80%;
+    height:auto;
+    background-color:#FFD700;
+}
+.menuItem{
+    margin:2%;
+    float:left;
+    width:96%;
+    height:80px;
+    background-color:#FFFAFA;
+    line-height:80px;
+    text-align:center;
+}
+
+
+.right{
+    margin-right:10;
+    float:left;
+    background-color:#1ad429;
+    width:60%;
+    min-height:800px;
+}
+.appInfor{
+    float:left;
+    margin:2%;
+    width:96%;
+    min-height:720px;
+    background-color:#FFFFFF;
+}
+.appItem{
+    float:left;
+    background-color:#FFDAB9;
+    height:120px;
+    margin:2% 2% 0 2%;
+    width:96%;
+}
+.appImage{
+    float:left;
+    margin:10px 5px 10px 10px;
+    height:100px;
+    width:100px;
+    background-color:#0000FF;
+}
+.appDescBar{
+    float:left;
+    width:800px;
+    height:100px;
+    margin:10px 10px 10px 0;
+    background-color:#C6E2FF;
+    padding-left:5px;
+    padding-right:1px;
+    overflow:hidden;
+}
+.appName{
+    float:left;
+    background-color:#006400;
+    width:320px;
+    padding-right:474px;
+    height:25px;
+    line-height:25px;
+    text-align:left;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.appType{
+    float:left;
+    width:120px;
+    padding-right:674px;
+    height:25px;
+    line-height:25px;
+    text-align:left;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    background-color:#0000FF;
+}
+.appDeveloper{
+    float:left;
+    width:240px;
+    padding-right:554px;
+    height:25px;
+    line-height:25px;
+    text-align:left;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    background-color:#CAE1FF;
+}
+.appDesc{
+    float:left;
+    width:794px;
+    height:25px;
+    line-height:25px;
+    text-align:left;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    background-color:#828282;
+
+}
+
+
+.page-normal{
+    float:left;
+    margin:32px auto 32px 32px;
+    color:#ff6500;
+    text-align:center;
+    font-size:14px;
+}
+.page-normal a,.page-normal .page-current,.page-normal .page-prev{
+    padding:5px 7px;
+    font-size:14px;
+    margin-left:10px;
+}
+.page-normal a{
+    border:1px solid #ff9600;
+    color:#ff6500;
+    text-decoration:none;
+}
+.page-normal a:hover{
+    border:1px solid #ff6500;
+    background:#ffbe94;
+}
+
+.page-normal .page-current{
+    border:1px solid #ff6500;
+    color:#ff6500;
+    background:#ffbe94;
+}
+.page-normal .page-prev{
+    border:1px solid #ffe3c6;
+    color:#ffe346;
+}
+
+.footer{
+    width: 100%;
+    float: left;
+    background-color:#df691a;
+    height:80px;
+    line-height:80px;
+    text-align:center;
+}
