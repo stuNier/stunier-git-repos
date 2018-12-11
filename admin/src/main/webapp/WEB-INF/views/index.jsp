@@ -17,6 +17,10 @@
         var pageInfo;
         var appData;
         $(document).ready(function(){
+            load();
+        })
+
+        function load() {
             $.ajax({
                 type: "POST",//方法类型
                 dataType: "json",//预期服务器返回的数据类型
@@ -36,7 +40,7 @@
                     alert("异常！");
                 }
             });
-        })
+        }
 
         function pageinfo(pageInfo) {
             var str = "";
@@ -179,12 +183,94 @@
             $('#itemInfor').html("");
             $('#itemInfor').html(str);
         }
+
+        function userInfo(){
+            var username = sessionStorage.getItem('name');
+            $.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/getuserinfo" ,//url
+                data:{"username": username},
+                success: function (result) {
+                    if (result.resultMessage == "success") {
+                        $('.right').html(showUserInfo(result.data));
+                    }else{
+                        alert(result.resultMessage);
+                    }
+                    ;
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+        }
+
+        function showUserInfo(userinfo) {
+            var str = "";
+            str += "<div class=\"modifyUserFormDiv\">\n" +
+                "\t\t\t\t\t<form id = \"modifyUserForm\">\n" +
+                "\t\t\t\t\t\t<table class = \"userInforTable\">\n" +
+                "\t\t\t\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t\t\t\t<th>用户名:</th>\n" +
+                "\t\t\t\t\t\t\t\t<th><label>"+ userinfo.name +"</label></th>\n" +
+                "\t\t\t\t\t\t\t\t<th><input name=\"name\" type=\"hidden\" value=\""+ userinfo.name +"\"/></th>\n" +
+                "\t\t\t\t\t\t\t</tr>\n" +
+                "\t\t\t\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t\t\t\t<th>邮箱:</th>\n" +
+                "\t\t\t\t\t\t\t\t<th><label>"+ userinfo.email +"</label></th>\n" +
+                "\t\t\t\t\t\t\t\t<th id = \"modifyEmail\" class=\"hiddenTh\"><input name=\"email\" type=\"text\" value='"+ userinfo.email +"'/></th>\n" +
+                "\t\t\t\t\t\t\t\t<th id = \"modifyEmailButton\" class = \"#\"><a name = \"modifyEmail\" href=\"javascript:void(0);\" onclick=\"modifyClick(this)\">修改</a></th>\n" +
+                "\t\t\t\t\t\t\t</tr>\n" +
+                "\t\t\t\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t\t\t\t<th>手机号:</th>\n" +
+                "\t\t\t\t\t\t\t\t<th><label>"+ userinfo.phone +"</label></th>\n" +
+                "\t\t\t\t\t\t\t\t<th id = \"modifyPhone\" class=\"hiddenTh\"><input name=\"phone\" type=\"text\" value='"+ userinfo.phone +"'/></th>\n" +
+                "\t\t\t\t\t\t\t\t<th id = \"modifyPhoneButton\" class=\"#\"><a name = \"modifyPhone\" href=\"javascript:void(0);\" onclick=\"modifyClick(this)\">修改</a></th>\n" +
+                "\t\t\t\t\t\t\t</tr>\n" +
+                "\t\t\t\t\t\t\t<tr>\n" +
+                "\t\t\t\t\t\t\t\t<th><a href=\"javascript:void(0);\" onclick='submitModifyUserForm()'>提交</a></th>\n" +
+                "\t\t\t\t\t\t\t</tr>\n" +
+                "\t\t\t\t\t\t</table>\n" +
+                "\t\t\t\t\t</form>\n" +
+                "\t\t\t\t</div>";
+            return str;
+        }
+
+        function submitModifyUserForm() {
+            $.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/modifyuser" ,//url
+                data: $('#modifyUserForm').serialize(),
+                success: function (result) {
+                    if (result.resultCode == 200) {
+                        alert("修改信息成功");
+                        $('.right').html(showUserInfo(result.data));
+                    }else{
+                        alert(result.resultMessage)
+                    }
+                    ;
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+        }
+
+
+        function modifyClick(e){
+            var id = "#"+e.name;
+            $(id).removeClass("hiddenTh");
+            $(id).addClass = "#";
+            id = id + "Button";
+            $(id).addClass("hiddenTh");
+        }
     </script>
 </head>
 <body>
 <div>
 
-    <div class="header">
+    <div id="header" class="header">
         header
     </div>
 
@@ -203,129 +289,24 @@
 
             <!-- 菜单 -->
             <div class="menu">
-                <div class="menuItem">个人资料</div>
-                <div class="menuItem">我的上传</div>
-                <div class="menuItem">下载app</div>
-                <div class="menuItem">上传app</div>
+                <div class="menuItem"><a href="javascript:void(0);" onclick="userInfo()">个人资料</a></div>
+                <div class="menuItem"><a href="javascript:void(0);">我的上传</a></div>
+                <div class="menuItem"><a href="javascript:void(0);">下载app</a></div>
+                <div class="menuItem"><a href="javascript:void(0);">上传app</a></div>
             </div>
         </div>
         <!-- 菜单结束 -->
 
         <!-- 显示框开始 -->
-        <div class="right">
+        <div id = "right" class="right">
             <div id="appInfor" class="appInfor">
                 <div id="itemInfor" class="itemInfor">
 
                 </div>
-                <%--<div class="appItem">--%>
-                    <%--<div class="appImage"></div>--%>
-                    <%--<div class="appDescBar">--%>
-                        <%--<div class="appName">app名app名app名app名app名app名app名app名app名app名app名app名app名app名app名app名app名app名app名app名</div>--%>
-                        <%--<div class="appType">app类型app类型app类型app类型app类型app类型app类型app类型app类型</div>--%>
-                        <%--<div class="appDeveloper">app发行商app发行商app发行商app发行商app发行商app发行商app发行商app发行商app发行商app发行商app发行商app发行商app发行商app发行商app发行商</div>--%>
-                        <%--<div class="appDesc">app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息app描述信息</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="appItem"></div>--%>
-                <%--<div class="appItem"></div>--%>
 
                 <!-- 分页 -->
                 <div id="page" class="page-normal">
-                    <%--<c:choose>--%>
-                        <%--<!-- 当页码趋于中部 -->--%>
-                        <%--<c:when test="${appdata.pageNum>4 && appdata.size-appdata.pageNum>3}">--%>
-                            <%--<a href="javascript:void(0);" class="page-next">&lt;</a>--%>
-                            <%--<a href="javascript:void(0);">1</a>--%>
-                            <%--...--%>
-                            <%--<c:forEach var="num" begin="${appdata.pageNum-2}" end="${appdata.pageNum+2}">--%>
-                                <%--<c:choose>--%>
-                                    <%--<c:when test="${num==appdata.pageNum}">--%>
-                                        <%--<span class="page-current">--%>
-                                            <%--<c:out value="${num}"/>--%>
-                                        <%--</span>--%>
-                                    <%--</c:when>--%>
-                                    <%--<c:otherwise>--%>
-                                        <%--<a href="javascript:void(0);">--%>
-                                            <%--<c:out value="${num}"/>--%>
-                                        <%--</a>--%>
-                                    <%--</c:otherwise>--%>
-                                <%--</c:choose>--%>
-                            <%--</c:forEach>--%>
-                            <%--...--%>
-                            <%--<a href="javascript:void(0);">${appdata.size}</a>--%>
-                            <%--<a href="javascript:void(0);" class="page-next">&gt;</a>--%>
-                        <%--</c:when>--%>
 
-                        <%--<!-- 当页码趋于头部 -->--%>
-                        <%--<c:when test="${appdata.pageNum<4}">--%>
-                            <%--<c:choose>--%>
-                                <%--<c:when test="${appdata.num==1}">--%>
-                                    <%--<span class="page-prev">&lt;</span>--%>
-                                <%--</c:when>--%>
-                                <%--<c:otherwise>--%>
-                                    <%--<a href="javascript:void(0);" class="page-next">&lt;</a>--%>
-                                <%--</c:otherwise>--%>
-                            <%--</c:choose>--%>
-                            <%--<c:forEach var="num" begin="1" end="4">--%>
-                                <%--<c:choose>--%>
-                                    <%--<c:when test="${num==appdata.pageNum}">--%>
-                                        <%--<span class="page-current">--%>
-                                            <%--<c:out value="${num}"/>--%>
-                                        <%--</span>--%>
-                                    <%--</c:when>--%>
-                                    <%--<c:otherwise>--%>
-                                        <%--<a href="javascript:void(0);">--%>
-                                            <%--<c:out value="${num}"/>--%>
-                                        <%--</a>--%>
-                                    <%--</c:otherwise>--%>
-                                <%--</c:choose>--%>
-                            <%--</c:forEach>--%>
-                            <%--...--%>
-                            <%--<a href="javascript:void(0);">${pagedata.size}</a>--%>
-                        <%--</c:when>--%>
-
-                        <%--<!-- 当页码趋于尾部 -->--%>
-                        <%--<c:when test="${appdata.size-appdata.pageNum<=3}">--%>
-                            <%--<a href="javascript:void(0);" class="page-next">&lt;</a>--%>
-                            <%--<a href="javascript:void(0);">1</a>--%>
-                            <%--...--%>
-                            <%--<c:forEach var="num" begin="${appdata.size-3}" end="${appdata.size}">--%>
-                                <%--<c:choose>--%>
-                                    <%--<c:when test="${num==appdata.pageNum}">--%>
-                                        <%--<span class="page-current">--%>
-                                            <%--<c:out value="${num}"/>--%>
-                                        <%--</span>--%>
-                                    <%--</c:when>--%>
-                                    <%--<c:otherwise>--%>
-                                        <%--<a href="javascript:void(0);">--%>
-                                            <%--<c:out value="${num}"/>--%>
-                                        <%--</a>--%>
-                                    <%--</c:otherwise>--%>
-                                <%--</c:choose>--%>
-                            <%--</c:forEach>--%>
-                            <%--<c:choose>--%>
-                                <%--<c:when test="${appdata.size==appdata.pageNum}">--%>
-                                    <%--<span class="page-prev">&gt;</span>--%>
-                                <%--</c:when>--%>
-                                <%--<c:otherwise>--%>
-                                    <%--<a href="javascript:void(0);" class="page-next">&gt;</a>--%>
-                                <%--</c:otherwise>--%>
-                            <%--</c:choose>--%>
-                        <%--</c:when>--%>
-                    <%--</c:choose>--%>
-
-                    <%--<span class="page-prev">&lt;</span>--%>
-                    <%--<span class="page-current">1</span>--%>
-                    <%--<a href="javascript:void(0);">2</a>--%>
-                    <%--<a href="javascript:void(0);">3</a>--%>
-                    <%--<a href="javascript:void(0);">4</a>--%>
-                    <%--<a href="javascript:void(0);">5</a>--%>
-                    <%--<a href="javascript:void(0);">6</a>--%>
-                    <%--<a href="javascript:void(0);">7</a>--%>
-                    <%--...--%>
-                    <%--<a href="javascript:void(0);">199</a>--%>
-                    <%--<a href="javascript:void(0);">200</a>--%>
-                    <%--<a href="javascript:void(0);" class="page-next">&gt;</a>--%>
                 </div>
             </div>
 

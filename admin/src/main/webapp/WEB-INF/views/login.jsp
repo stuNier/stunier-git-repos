@@ -74,6 +74,7 @@
                     console.log(result);//打印服务端返回的数据(调试用)
                     if (result.resultCode == 200) {
                         alert("登录成功");
+                        sessionStorage.setItem("name", result.data.name);
                         window.location.href="/page/index";
                     }else{
                         alert("密码错误！");
@@ -86,6 +87,7 @@
                 }
             });
         }
+
 
     </script>
 </head>

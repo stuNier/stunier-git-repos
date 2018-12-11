@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @ResponseBody
@@ -44,6 +46,9 @@ public class UserController {
             request.getSession().setAttribute("name", user.getName());
             resultUtils.setResultCode(200);
             resultUtils.setResultMessage("登录成功");
+            Map<String , String> map = new HashMap<>();
+            map.put("name", user.getName());
+            resultUtils.setData(map);
             return resultUtils;
         }
         resultUtils.setResultMessage("登录失败，密码错误！");
@@ -132,6 +137,25 @@ public class UserController {
         logger.info("可以使用的邮箱");
         resultUtils.setResultMessage("可以使用的邮箱");
         resultUtils.setResultCode(200);
+        return resultUtils;
+    }
+
+
+    @RequestMapping("/getuserinfo")
+    public ResultUtils getUserInfo(String username){
+        ResultUtils<User> resultUtils = new ResultUtils<>();
+        logger.info("getuserinfo : param = " + username);
+
+        User user = userService.queryUserByName(username);
+        if(user == null){
+            logger.info("用户名" + username + "在数据库中不存在，无法查询到该用户名");
+            resultUtils.setResultMessage("fail");
+            resultUtils.setResultCode(0);
+            return resultUtils;
+        }
+        resultUtils.setResultMessage("success");
+        resultUtils.setResultCode(200);
+        resultUtils.setData(user);
         return resultUtils;
     }
 

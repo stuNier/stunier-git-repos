@@ -200,3 +200,28 @@ body{
     line-height:80px;
     text-align:center;
 }
+.modifyUserFormDiv{
+    float:left;
+    margin:150px 300px 80px 200px;
+    width:600px;
+    background-color:#df691a;
+}
+
+.modifyUserFormDiv table{
+    border-spacing:15px 50px;
+}
+
+.modifyUserFormDiv th{
+    text-align:left;
+}
+
+.modifyUserFormDiv a{
+    margin-left:10px;
+}
+
+.hiddenTh{
+    display:none;
+}
+a{
+    text-decoration:none;
+}
