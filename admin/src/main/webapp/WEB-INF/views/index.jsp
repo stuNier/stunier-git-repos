@@ -265,6 +265,7 @@
             id = id + "Button";
             $(id).addClass("hiddenTh");
         }
+
     </script>
 </head>
 <body>
