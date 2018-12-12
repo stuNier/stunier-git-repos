@@ -1,0 +1,10 @@
+input{
+    float: left;
+}
+.register_a{
+    float: left;
+}
+label{
+    float: left;
+    text-align: left;
+}
