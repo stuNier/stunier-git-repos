@@ -2,7 +2,6 @@ package com.cdut.Bean;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -49,7 +48,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name.trim();
     }
 
     public String getPassword() {
@@ -57,7 +56,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password.trim();
     }
 
     public String getPhone() {
@@ -65,7 +64,7 @@ public class User {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone.trim();
     }
 
     public String getEmail() {
@@ -73,7 +72,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email.trim();
     }
 
     public Date getCreated() {

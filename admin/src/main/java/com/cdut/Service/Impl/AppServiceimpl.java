@@ -7,7 +7,6 @@ import com.cdut.Mapper.UserAppMapper;
 import com.cdut.Service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +33,7 @@ public class AppServiceimpl implements AppService {
         criteria.andAppnameEqualTo(app.getAppname());
         criteria.andVersionEqualTo(app.getVersion());
         List<App> result=appMapper.selectByExample(appExample);
-        if(result.size()==0){
+        if(result.isEmpty()){
             return null;
         }
         else
@@ -47,7 +46,7 @@ public class AppServiceimpl implements AppService {
         AppExample.Criteria criteria =appExample.createCriteria();
         criteria.andVersionEqualTo(app.getVersion());
         criteria.andAppnameEqualTo(app.getAppname());
-        if (appMapper.selectByExample(appExample).size()<=0){
+        if (appMapper.selectByExample(appExample).isEmpty()){
             return false;
         }
         appMapper.insert(app);
@@ -59,7 +58,7 @@ public class AppServiceimpl implements AppService {
         AppExample appExample=new AppExample();
         AppExample.Criteria criteria=appExample.createCriteria();
         criteria.andIdEqualTo(id);
-        if(appMapper.selectByExample(appExample).size()<=0){
+        if(appMapper.selectByExample(appExample).isEmpty()){
             return false;
         }
         appMapper.deleteByExample(appExample);
@@ -76,21 +75,19 @@ public class AppServiceimpl implements AppService {
 
     @Override
     public List<App> queryByUsername(String username){
-        List<App> list = userAppMapper.queryAppByUserName(username);
-        return list;
+        return userAppMapper.queryAppByUserName(username);
     }
 
     @Override
     public List<App> queryAllApp(){
         AppExample appExample=new AppExample();
-        List<App> list = appMapper.selectByExample(appExample);
-        return list;
+        return appMapper.selectByExample(appExample);
     }
 
     @Override
     public int countApp(){
         AppExample appExample =new AppExample();
-        AppExample.Criteria criteria =appExample.createCriteria();
+        appExample.createCriteria();
         return appMapper.countByExample(appExample);
     }
 

@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(name);
         List<User> result = userMapper.select(user);
-        if(result.size() == 0){
+        if(result.isEmpty()){
             logger.info("未查询到该用户名，用户为空");
             return null;
         }
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setPhone(phone);
         List<User> result = userMapper.select(user);
-        if(result.size() == 0){
+        if(result.isEmpty()){
             logger.info("phone未注册");
             return null;
         }
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setEmail(email);
         List<User> result = userMapper.select(user);
-        if(result.size() == 0){
+        if(result.isEmpty()){
             logger.info("email未注册");
             return null;
         }
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean addUser(User user){
-        if(userMapper.select(user).size() == 0){
+        if(userMapper.select(user).isEmpty()){
             user.setCreated(new Date());
             user.setUpdated(new Date());
             userMapper.insert(user);

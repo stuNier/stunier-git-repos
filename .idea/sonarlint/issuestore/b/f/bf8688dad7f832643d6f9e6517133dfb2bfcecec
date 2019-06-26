@@ -1,0 +1,20 @@
+
+fsquid:S1192ˆ"IDefine a constant instead of duplicating this literal "install" 12 times.(–´Úèþÿÿÿÿ
+hsquid:S1192ø"KDefine a constant instead of duplicating this literal "developer" 12 times.(¦øÿôýÿÿÿÿ
+wsquid:S14888"`Immediately return this expression instead of assigning it to the temporary variable "criteria".(¶Õ¯ì
+asquid:S1192¾"IDefine a constant instead of duplicating this literal "apptype" 12 times.(Ôå¨Ý
+Zsquid:S1155K">Use isEmpty() to check whether the collection is empty or not.(í´Õûüÿÿÿÿ
+fsquid:S1192À"IDefine a constant instead of duplicating this literal "version" 12 times.(Ý»µ„øÿÿÿÿ
+asquid:S1192²"IDefine a constant instead of duplicating this literal "appname" 12 times.(ÛƒãÏ
+dsquid:S1192†"GDefine a constant instead of duplicating this literal "image" 12 times.(ºÃêÝþÿÿÿÿ
+]squid:S00112f"FDefine and throw a dedicated exception instead of using a generic one.(ìá¤
+
+csquid:S00112X"FDefine and throw a dedicated exception instead of using a generic one.(ÔÁñÍøÿÿÿÿ
+rsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Óäã‰
+csquid:S00112_"FDefine and throw a dedicated exception instead of using a generic one.(õÜ—ºþÿÿÿÿ
+_squid:S1192„"HDefine a constant instead of duplicating this literal "author" 10 times.(Œ×÷8
+csquid:S1192Î"KDefine a constant instead of duplicating this literal "downloads" 10 times.(ä–à¯
+Tsquid:S11551">Use isEmpty() to check whether the collection is empty or not.(Á½¼s
+osquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÏßÉe
+esquid:S1192Ì"HDefine a constant instead of duplicating this literal "status" 10 times.(Æ‹óÁùÿÿÿÿ
+psquid:S2293G"YReplace the type specification in this constructor call with the diamond operator ("<>").(óÎ³Ù

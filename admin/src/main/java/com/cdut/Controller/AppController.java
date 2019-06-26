@@ -4,8 +4,6 @@ import com.cdut.Bean.App;
 import com.cdut.Commons.PageInfo;
 import com.cdut.Commons.ResultUtils;
 import com.cdut.Service.AppService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +14,6 @@ import java.util.List;
 @Controller
 @ResponseBody
 public class AppController {
-    private Logger logger = LoggerFactory.getLogger(AppController.class);
 
     private int pageSize = 5;
 
@@ -25,7 +22,8 @@ public class AppController {
 
     @Autowired
     private AppService appService;
-    {
+
+    public AppController() {
         //设置单页大小
         pageInfo.setPageSize(pageSize);
     }

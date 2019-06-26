@@ -18,7 +18,7 @@ public class PageController {
 
     @RequestMapping("/page/{pageName}")
     public ModelAndView toPage(@PathVariable(value = "pageName") String pageName){
-        logger.info("pageName:"+pageName);
+        logger.info("pageName:{}",pageName);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(pageName);
         return modelAndView;

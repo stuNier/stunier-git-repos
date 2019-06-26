@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdut.Mapper.AppMapper" >
+  <resultMap id="BaseResultMap" type="com.cdut.Bean.App" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="appname" property="appname" jdbcType="VARCHAR" />
+    <result column="developer" property="developer" jdbcType="VARCHAR" />
+    <result column="apptype" property="apptype" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="BIGINT" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="install" property="install" jdbcType="VARCHAR" />
+    <result column="downloads" property="downloads" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cdut.Bean.App" extends="BaseResultMap" >
+    <result column="appdes" property="appdes" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, appname, developer, apptype, author, version, image, status, install, downloads
+  </sql>
+  <sql id="Blob_Column_List" >
+    appdes
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.cdut.Bean.AppExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_app
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cdut.Bean.AppExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_app
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_app
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectSpeRowApp" resultType="com.cdut.Bean.App" parameterType="java.util.Map">
+    select *
+    from tb_app
+    limit ${startRow} ,${pageSize}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_app
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cdut.Bean.AppExample" >
+    delete from tb_app
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cdut.Bean.App" >
+    insert into tb_app (id, appname, developer,
+      apptype, author, version, 
+      image, status, install, 
+      downloads, appdes)
+    values (#{id,jdbcType=BIGINT}, #{appname,jdbcType=VARCHAR}, #{developer,jdbcType=VARCHAR}, 
+      #{apptype,jdbcType=VARCHAR}, #{author,jdbcType=BIGINT}, #{version,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{install,jdbcType=VARCHAR}, 
+      #{downloads,jdbcType=BIGINT}, #{appdes,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdut.Bean.App" >
+    insert into tb_app
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appname != null" >
+        appname,
+      </if>
+      <if test="developer != null" >
+        developer,
+      </if>
+      <if test="apptype != null" >
+        apptype,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="install != null" >
+        install,
+      </if>
+      <if test="downloads != null" >
+        downloads,
+      </if>
+      <if test="appdes != null" >
+        appdes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appname != null" >
+        #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null" >
+        #{developer,jdbcType=VARCHAR},
+      </if>
+      <if test="apptype != null" >
+        #{apptype,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        #{install,jdbcType=VARCHAR},
+      </if>
+      <if test="downloads != null" >
+        #{downloads,jdbcType=BIGINT},
+      </if>
+      <if test="appdes != null" >
+        #{appdes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cdut.Bean.AppExample" resultType="java.lang.Integer" >
+    select count(*) from tb_app
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_app
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.appname != null" >
+        appname = #{record.appname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.developer != null" >
+        developer = #{record.developer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apptype != null" >
+        apptype = #{record.apptype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=BIGINT},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.install != null" >
+        install = #{record.install,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downloads != null" >
+        downloads = #{record.downloads,jdbcType=BIGINT},
+      </if>
+      <if test="record.appdes != null" >
+        appdes = #{record.appdes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_app
+    set id = #{record.id,jdbcType=BIGINT},
+      appname = #{record.appname,jdbcType=VARCHAR},
+      developer = #{record.developer,jdbcType=VARCHAR},
+      apptype = #{record.apptype,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=BIGINT},
+      version = #{record.version,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      install = #{record.install,jdbcType=VARCHAR},
+      downloads = #{record.downloads,jdbcType=BIGINT},
+      appdes = #{record.appdes,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_app
+    set id = #{record.id,jdbcType=BIGINT},
+      appname = #{record.appname,jdbcType=VARCHAR},
+      developer = #{record.developer,jdbcType=VARCHAR},
+      apptype = #{record.apptype,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=BIGINT},
+      version = #{record.version,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      install = #{record.install,jdbcType=VARCHAR},
+      downloads = #{record.downloads,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdut.Bean.App" >
+    update tb_app
+    <set >
+      <if test="appname != null" >
+        appname = #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null" >
+        developer = #{developer,jdbcType=VARCHAR},
+      </if>
+      <if test="apptype != null" >
+        apptype = #{apptype,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="install != null" >
+        install = #{install,jdbcType=VARCHAR},
+      </if>
+      <if test="downloads != null" >
+        downloads = #{downloads,jdbcType=BIGINT},
+      </if>
+      <if test="appdes != null" >
+        appdes = #{appdes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cdut.Bean.App" >
+    update tb_app
+    set appname = #{appname,jdbcType=VARCHAR},
+      developer = #{developer,jdbcType=VARCHAR},
+      apptype = #{apptype,jdbcType=VARCHAR},
+      author = #{author,jdbcType=BIGINT},
+      version = #{version,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      install = #{install,jdbcType=VARCHAR},
+      downloads = #{downloads,jdbcType=BIGINT},
+      appdes = #{appdes,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdut.Bean.App" >
+    update tb_app
+    set appname = #{appname,jdbcType=VARCHAR},
+      developer = #{developer,jdbcType=VARCHAR},
+      apptype = #{apptype,jdbcType=VARCHAR},
+      author = #{author,jdbcType=BIGINT},
+      version = #{version,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      install = #{install,jdbcType=VARCHAR},
+      downloads = #{downloads,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

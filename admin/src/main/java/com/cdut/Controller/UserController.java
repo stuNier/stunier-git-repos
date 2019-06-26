@@ -6,7 +6,6 @@ import com.cdut.Service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -144,11 +143,11 @@ public class UserController {
     @RequestMapping("/getuserinfo")
     public ResultUtils getUserInfo(String username){
         ResultUtils<User> resultUtils = new ResultUtils<>();
-        logger.info("getuserinfo : param = " + username);
+        logger.info("getuserinfo : param = {}", username);
 
         User user = userService.queryUserByName(username);
         if(user == null){
-            logger.info("用户名" + username + "在数据库中不存在，无法查询到该用户名");
+            logger.info("用户名{}在数据库中不存在，无法查询到该用户名", username);
             resultUtils.setResultMessage("fail");
             resultUtils.setResultCode(0);
             return resultUtils;

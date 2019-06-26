@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdut.Mapper.UserAppMapper" >
+    <select id="queryAppByUserName" parameterType="java.lang.String" resultType="java.util.List" >
+      select appname, developer, apptype, author, version, appdes, image, status, install,downloads
+      from tb_app,tb_user
+      where tb_user.name=#{username} and tb_user.id=tb_app.author
+    </select>
+</mapper>
